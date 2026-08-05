@@ -1,0 +1,856 @@
+/* ==================================================
+   ABOUT PAGE
+================================================== */
+
+
+/* ==================================================
+   ABOUT HERO
+================================================== */
+
+.about-hero-section {
+    position: relative;
+    padding: 105px 0 115px;
+    background:
+        linear-gradient(
+            110deg,
+            #f7faf8 0%,
+            #ffffff 58%,
+            #f1f6f2 100%
+        );
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.about-hero-section::before {
+    content: "";
+    position: absolute;
+    top: -240px;
+    right: -150px;
+    width: 650px;
+    height: 650px;
+    border: 1px solid rgba(46, 125, 50, 0.10);
+    border-radius: 50%;
+}
+
+.about-hero-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: 90px;
+}
+
+.about-hero-content h1 {
+    max-width: 770px;
+    font-size: clamp(3rem, 5vw, 4.7rem);
+}
+
+.about-hero-description {
+    max-width: 700px;
+    margin-top: 27px;
+    font-size: 1.08rem;
+    line-height: 1.85;
+}
+
+.about-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 36px;
+}
+
+
+/* ==================================================
+   ABOUT HERO VISUAL
+================================================== */
+
+.about-hero-visual {
+    position: relative;
+    min-height: 520px;
+    display: grid;
+    place-items: center;
+}
+
+.visual-orbit {
+    position: absolute;
+    border: 1px solid rgba(46, 125, 50, 0.19);
+    border-radius: 50%;
+}
+
+.visual-orbit-large {
+    width: 500px;
+    height: 500px;
+}
+
+.visual-orbit-medium {
+    width: 365px;
+    height: 365px;
+}
+
+.visual-orbit-small {
+    width: 230px;
+    height: 230px;
+    background: rgba(46, 125, 50, 0.03);
+}
+
+.visual-core {
+    position: relative;
+    z-index: 3;
+    width: 210px;
+    min-height: 210px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    box-shadow: var(--shadow-medium);
+    text-align: center;
+}
+
+.visual-core-label {
+    color: var(--primary);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.visual-core strong {
+    margin-top: 10px;
+    color: var(--dark);
+    font-family: "Poppins", sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.4;
+}
+
+.visual-core small {
+    margin-top: 8px;
+    color: var(--text);
+    font-size: 0.67rem;
+    line-height: 1.5;
+}
+
+.visual-node {
+    position: absolute;
+    z-index: 4;
+    min-width: 90px;
+    padding: 10px 14px;
+    color: var(--dark);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--primary);
+    border-radius: 4px;
+    box-shadow: var(--shadow-small);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.node-one {
+    top: 45px;
+    left: 120px;
+}
+
+.node-two {
+    top: 125px;
+    right: 18px;
+}
+
+.node-three {
+    bottom: 95px;
+    right: 32px;
+}
+
+.node-four {
+    bottom: 40px;
+    left: 165px;
+}
+
+.node-five {
+    bottom: 125px;
+    left: 8px;
+}
+
+.node-six {
+    top: 145px;
+    left: 3px;
+}
+
+
+/* ==================================================
+   COMPANY STORY
+================================================== */
+
+.company-story-section {
+    padding: 115px 0;
+    background: var(--white);
+}
+
+.company-story-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+    gap: 100px;
+}
+
+.story-panel {
+    background: #18211c;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: var(--shadow-medium);
+}
+
+.story-panel-header {
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 27px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.story-panel-header span {
+    color: #aeb9b2;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.story-panel-body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.story-stat {
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.story-stat:nth-child(2n) {
+    border-right: 0;
+}
+
+.story-stat:nth-last-child(-n + 2) {
+    border-bottom: 0;
+}
+
+.story-stat strong {
+    color: var(--white);
+    font-family: "Poppins", sans-serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.story-stat span {
+    margin-top: 8px;
+    color: #9faea5;
+    font-size: 0.78rem;
+}
+
+.company-story-content h2 {
+    max-width: 650px;
+}
+
+.company-story-content > p {
+    max-width: 660px;
+    margin-top: 20px;
+    font-size: 1rem;
+    line-height: 1.9;
+}
+
+
+/* ==================================================
+   COMMON ABOUT HEADINGS
+================================================== */
+
+.centered-about-heading {
+    max-width: 790px;
+    margin: 0 auto 58px;
+    text-align: center;
+}
+
+.about-section-heading-row {
+    display: grid;
+    grid-template-columns: 1fr 0.75fr;
+    align-items: end;
+    gap: 80px;
+    margin-bottom: 55px;
+}
+
+.about-section-heading-row h2 {
+    max-width: 700px;
+}
+
+.about-section-heading-row > p {
+    max-width: 500px;
+    line-height: 1.85;
+}
+
+
+/* ==================================================
+   VISION AND MISSION
+================================================== */
+
+.vision-mission-section {
+    padding: 115px 0;
+    background: var(--off-white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.vision-mission-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+}
+
+.vision-mission-card {
+    position: relative;
+    min-height: 430px;
+    padding: 45px;
+    background: var(--white);
+    border: 1px solid var(--border);
+}
+
+.vision-mission-card:first-child {
+    border-top: 4px solid var(--primary);
+}
+
+.vision-mission-card:last-child {
+    color: #cbd5ce;
+    background: #18211c;
+    border-color: #18211c;
+    border-top: 4px solid #57ad5c;
+}
+
+.vision-mission-number {
+    position: absolute;
+    top: 35px;
+    right: 40px;
+    color: #aeb8b2;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.vision-mission-label {
+    margin-bottom: 30px;
+    color: var(--primary);
+    font-size: 0.73rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.vision-mission-card h3 {
+    max-width: 560px;
+    font-size: 1.55rem;
+    line-height: 1.55;
+}
+
+.vision-mission-card > p:last-child {
+    max-width: 570px;
+    margin-top: 26px;
+    line-height: 1.85;
+}
+
+.vision-mission-card:last-child h3 {
+    color: var(--white);
+}
+
+.vision-mission-card:last-child .vision-mission-label {
+    color: #65b869;
+}
+
+.vision-mission-card:last-child > p:last-child {
+    color: #aeb9b2;
+}
+
+
+/* ==================================================
+   PROCESS
+================================================== */
+
+.process-section {
+    padding: 115px 0;
+    background: var(--white);
+}
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+}
+
+.process-card {
+    position: relative;
+    min-height: 285px;
+    padding: 34px 27px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.process-number {
+    display: block;
+    margin-bottom: 42px;
+    color: var(--primary);
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.process-card h3 {
+    margin-bottom: 14px;
+    font-size: 1.08rem;
+}
+
+.process-card p {
+    font-size: 0.85rem;
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   VALUES
+================================================== */
+
+.values-section {
+    padding: 115px 0;
+    background: var(--off-white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.value-card {
+    min-height: 260px;
+    padding: 34px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.value-icon {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 28px;
+    color: var(--primary);
+    background: var(--primary-light);
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.value-card h3 {
+    margin-bottom: 13px;
+    font-size: 1.12rem;
+}
+
+.value-card p {
+    font-size: 0.87rem;
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   CAPABILITIES
+================================================== */
+
+.about-capabilities-section {
+    padding: 115px 0;
+    background: #18211c;
+}
+
+.capabilities-layout {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    align-items: start;
+    gap: 90px;
+}
+
+.capabilities-heading h2 {
+    color: var(--white);
+}
+
+.capabilities-heading > p:last-child {
+    max-width: 450px;
+    margin-top: 22px;
+    color: #aeb9b2;
+    line-height: 1.85;
+}
+
+.capability-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.capability-column {
+    min-height: 430px;
+    padding: 37px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.capability-label {
+    color: #64b669;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.capability-column h3 {
+    margin-top: 17px;
+    color: var(--white);
+    font-size: 1.3rem;
+    line-height: 1.5;
+}
+
+.capability-column ul {
+    margin-top: 28px;
+}
+
+.capability-column li {
+    position: relative;
+    padding: 13px 0 13px 20px;
+    color: #b7c2bb;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+    font-size: 0.85rem;
+}
+
+.capability-column li::before {
+    content: "";
+    position: absolute;
+    top: 21px;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background: #64b669;
+    border-radius: 50%;
+}
+
+
+/* ==================================================
+   FACTS
+================================================== */
+
+.about-facts-section {
+    background: var(--primary);
+}
+
+.about-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.about-fact {
+    min-height: 155px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 28px;
+    border-right: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.about-fact:last-child {
+    border-right: 0;
+}
+
+.about-fact span {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.about-fact strong {
+    margin-top: 9px;
+    color: var(--white);
+    font-family: "Poppins", sans-serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   LEADERSHIP PREVIEW
+================================================== */
+
+.about-leadership-section {
+    padding: 115px 0;
+    background: var(--white);
+}
+
+.about-leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+}
+
+.about-leadership-card {
+    min-height: 300px;
+    padding: 34px;
+    background: var(--off-white);
+    border: 1px solid var(--border);
+}
+
+.about-leadership-initials {
+    width: 78px;
+    height: 78px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 43px;
+    color: var(--white);
+    background: var(--primary);
+    font-family: "Poppins", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.about-leadership-card h3 {
+    margin-top: 12px;
+    font-size: 1.25rem;
+}
+
+
+/* ==================================================
+   CTA
+================================================== */
+
+.about-cta-section {
+    padding: 100px 0;
+    background: #edf3ef;
+}
+
+.about-cta-layout {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 70px;
+}
+
+.about-cta-layout h2 {
+    max-width: 760px;
+}
+
+.about-cta-layout p:last-child {
+    max-width: 650px;
+    margin-top: 20px;
+    line-height: 1.8;
+}
+
+.about-cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 245px;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 1050px) {
+
+    .about-hero-grid {
+        grid-template-columns: 1fr 0.85fr;
+        gap: 50px;
+    }
+
+    .visual-orbit-large {
+        width: 430px;
+        height: 430px;
+    }
+
+    .process-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .process-card:nth-child(4),
+    .process-card:nth-child(5) {
+        min-height: 240px;
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .about-hero-section {
+        padding: 80px 0;
+    }
+
+    .about-hero-grid,
+    .company-story-grid,
+    .capabilities-layout {
+        grid-template-columns: 1fr;
+        gap: 55px;
+    }
+
+    .about-hero-visual {
+        min-height: 500px;
+    }
+
+    .about-section-heading-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .vision-mission-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .capability-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .about-facts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-fact:nth-child(2) {
+        border-right: 0;
+    }
+
+    .about-fact:nth-child(-n + 2) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .about-leadership-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-cta-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .about-cta-actions {
+        min-width: 0;
+        max-width: 320px;
+    }
+
+}
+
+
+@media (max-width: 620px) {
+
+    .about-hero-section,
+    .company-story-section,
+    .vision-mission-section,
+    .process-section,
+    .values-section,
+    .about-capabilities-section,
+    .about-leadership-section,
+    .about-cta-section {
+        padding: 75px 0;
+    }
+
+    .about-hero-content h1 {
+        font-size: clamp(2.45rem, 11vw, 3.5rem);
+    }
+
+    .about-hero-actions {
+        flex-direction: column;
+    }
+
+    .about-hero-visual {
+        display: none;
+    }
+
+    .story-panel-body {
+        grid-template-columns: 1fr;
+    }
+
+    .story-stat {
+        min-height: 130px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .story-stat:nth-last-child(-n + 2) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .story-stat:last-child {
+        border-bottom: 0;
+    }
+
+    .vision-mission-card {
+        min-height: auto;
+        padding: 35px 28px;
+    }
+
+    .vision-mission-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .process-grid,
+    .values-grid,
+    .about-facts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .process-card {
+        min-height: 235px;
+    }
+
+    .capability-column {
+        min-height: auto;
+        padding: 30px 26px;
+    }
+
+    .about-fact {
+        min-height: 120px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .about-fact:last-child {
+        border-bottom: 0;
+    }
+
+    .about-leadership-card {
+        min-height: 250px;
+    }
+
+    .about-cta-actions {
+        max-width: none;
+    }
+
+}
