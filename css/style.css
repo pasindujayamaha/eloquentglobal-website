@@ -176,7 +176,7 @@ p {
 
 .brand-logo img {
     width: 225px;
-    height: 76px;
+    height: 176px;
     object-fit: contain;
 }
 
@@ -1149,7 +1149,7 @@ a.contact-detail-card:hover {
 
 .footer-brand img {
     width: 230px;
-    height: 78px;
+    height: 178px;
     padding: 5px 8px;
     background: var(--white);
     border-radius: 3px;
