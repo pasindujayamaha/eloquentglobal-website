@@ -77,7 +77,8 @@ const currentFile = window.location.pathname.split("/").pop() || "index.html";
 const commercialPages = [
     "custom-software-development.html",
     "mvp-development.html",
-    "saas-development.html"
+    "saas-development.html",
+    "ai-development.html"
 ];
 
 // --------------------------------------------------
@@ -131,6 +132,9 @@ seoSupportStyle.textContent = `
         gap: 18px;
         margin-top: 28px;
     }
+    .eg-related-grid.eg-related-grid-three {
+        grid-template-columns: repeat(3, minmax(0,1fr));
+    }
     .eg-related-card,
     .eg-work-card {
         display: block;
@@ -179,6 +183,11 @@ seoSupportStyle.textContent = `
     .eg-section-cta {
         margin-top: 26px;
     }
+    @media (max-width: 900px) {
+        .eg-related-grid.eg-related-grid-three {
+            grid-template-columns: 1fr;
+        }
+    }
     @media (max-width: 820px) {
         .eg-proof-grid,
         .eg-work-grid,
@@ -189,29 +198,29 @@ seoSupportStyle.textContent = `
 `;
 document.head.appendChild(seoSupportStyle);
 
-function createProofStrip(includeMarketing = true) {
-    const section = document.createElement("section");
-    section.className = "eg-proof-strip";
-    section.setAttribute("aria-label", "Eloquent Global project experience");
-
-    const thirdItem = includeMarketing
-        ? `<div class="eg-proof-item"><strong>50+</strong><span>Marketing Projects</span></div>`
-        : `<div class="eg-proof-item"><strong>2019</strong><span>Established</span></div>`;
-
-    section.innerHTML = `
-        <div class="container eg-proof-grid">
-            <div class="eg-proof-item"><strong>30+</strong><span>Software Development Projects</span></div>
-            <div class="eg-proof-item"><strong>50+</strong><span>${includeMarketing ? "Marketing Projects" : "Digital Projects Across Our Portfolio"}</span></div>
-            ${thirdItem}
-        </div>
-    `;
-
-    return section;
-}
-
 function insertAfter(referenceNode, newNode) {
     if (!referenceNode || !referenceNode.parentNode) return;
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
+function projectProofMarkup(homeStyle = false) {
+    if (homeStyle) {
+        return `
+            <div class="container eg-proof-grid">
+                <div class="eg-proof-item"><strong>30+</strong><span>Software Development Projects</span></div>
+                <div class="eg-proof-item"><strong>50+</strong><span>Marketing Projects</span></div>
+                <div class="eg-proof-item"><strong>2019</strong><span>Established</span></div>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="container eg-proof-grid">
+            <div class="eg-proof-item"><strong>30+</strong><span>Software Development Projects</span></div>
+            <div class="eg-proof-item"><strong>USA · UK · Europe</strong><span>Remote International Delivery</span></div>
+            <div class="eg-proof-item"><strong>2019</strong><span>Established</span></div>
+        </div>
+    `;
 }
 
 // --------------------------------------------------
@@ -234,19 +243,13 @@ if (currentFile === "index.html") {
         const proof = document.createElement("section");
         proof.className = "eg-proof-strip";
         proof.setAttribute("aria-label", "Eloquent Global project experience");
-        proof.innerHTML = `
-            <div class="container eg-proof-grid">
-                <div class="eg-proof-item"><strong>30+</strong><span>Software Development Projects</span></div>
-                <div class="eg-proof-item"><strong>50+</strong><span>Marketing Projects</span></div>
-                <div class="eg-proof-item"><strong>2019</strong><span>Established</span></div>
-            </div>
-        `;
+        proof.innerHTML = projectProofMarkup(true);
         insertAfter(heroSection, proof);
     }
 }
 
 // --------------------------------------------------
-// Services page: direct crawlable destination cards after render
+// Services page integration
 // --------------------------------------------------
 
 if (currentFile === "services.html") {
@@ -264,13 +267,7 @@ if (currentFile === "services.html") {
     if (heroSection && !document.querySelector(".eg-proof-strip")) {
         const proof = document.createElement("section");
         proof.className = "eg-proof-strip";
-        proof.innerHTML = `
-            <div class="container eg-proof-grid">
-                <div class="eg-proof-item"><strong>30+</strong><span>Software Development Projects</span></div>
-                <div class="eg-proof-item"><strong>50+</strong><span>Marketing Projects</span></div>
-                <div class="eg-proof-item"><strong>2019</strong><span>Established</span></div>
-            </div>
-        `;
+        proof.innerHTML = projectProofMarkup(true);
         insertAfter(heroSection, proof);
     }
 
@@ -288,11 +285,25 @@ if (currentFile === "services.html") {
         }
     }
 
-    const overviewGrid = document.querySelector(".service-overview-grid");
+    const aiHeading = [...document.querySelectorAll(".service-detail-section h2, .service-capability h3")]
+        .find((heading) => heading.textContent.toLowerCase().includes("intelligent") || heading.textContent.trim() === "AI & Automation");
 
+    if (aiHeading) {
+        const aiSection = aiHeading.closest(".service-detail-section") || aiHeading.closest(".service-capability");
+        if (aiSection && !aiSection.querySelector('a[href="ai-development.html"]')) {
+            const link = document.createElement("a");
+            link.href = "ai-development.html";
+            link.className = "text-link";
+            link.innerHTML = "Explore AI development services <span>→</span>";
+            aiSection.appendChild(link);
+        }
+    }
+
+    const overviewGrid = document.querySelector(".service-overview-grid");
     const serviceCards = [
         ["07", "MVP", "MVP Development", "Focused startup products built from idea to launch-ready first release.", "mvp-development.html"],
-        ["08", "SaaS", "SaaS Development", "Custom subscription products, platforms and SaaS applications built for continued growth.", "saas-development.html"]
+        ["08", "SaaS", "SaaS Development", "Custom subscription products, platforms and SaaS applications built for continued growth.", "saas-development.html"],
+        ["09", "AI", "AI Development", "Custom AI applications, AI agents and AI-enabled product features built around practical use cases.", "ai-development.html"]
     ];
 
     serviceCards.forEach(([number, icon, title, copy, href]) => {
@@ -313,7 +324,7 @@ if (currentFile === "services.html") {
 }
 
 // --------------------------------------------------
-// Commercial service cluster: proof, selected work and cross-links
+// Commercial service cluster: proof, work and cross-links
 // --------------------------------------------------
 
 if (commercialPages.includes(currentFile)) {
@@ -323,13 +334,7 @@ if (commercialPages.includes(currentFile)) {
     if (hero && !document.querySelector(".eg-proof-strip")) {
         const proof = document.createElement("section");
         proof.className = "eg-proof-strip";
-        proof.innerHTML = `
-            <div class="container eg-proof-grid">
-                <div class="eg-proof-item"><strong>30+</strong><span>Software Development Projects</span></div>
-                <div class="eg-proof-item"><strong>USA · UK · Europe</strong><span>Remote International Delivery</span></div>
-                <div class="eg-proof-item"><strong>2019</strong><span>Established</span></div>
-            </div>
-        `;
+        proof.innerHTML = projectProofMarkup(false);
         insertAfter(hero, proof);
     }
 
@@ -364,41 +369,45 @@ if (commercialPages.includes(currentFile)) {
             </div>
         `;
 
-        const faq = main.querySelector('section[id="faq"], .mvp-faq-section, .csd-faq-section, .saas-faq-section');
-        if (faq) {
-            main.insertBefore(workSection, faq);
-        } else {
-            main.appendChild(workSection);
-        }
+        const faq = main.querySelector('section[id="faq"], .mvp-faq-section, .csd-faq-section, .saas-faq-section, .ai-faq-section');
+        if (faq) main.insertBefore(workSection, faq);
+        else main.appendChild(workSection);
     }
 
     if (main && !document.querySelector(".eg-related-links")) {
-        const relatedSection = document.createElement("section");
-        relatedSection.className = "eg-related-links";
-
         const relatedMap = {
             "custom-software-development.html": [
                 ["MVP Development", "Validate a new product with focused version-one scope and a structured path to launch.", "mvp-development.html"],
-                ["SaaS Development", "Build subscription software, multi-user platforms and SaaS products for continued development.", "saas-development.html"]
+                ["SaaS Development", "Build subscription software, multi-user platforms and SaaS products for continued development.", "saas-development.html"],
+                ["AI Development", "Add useful AI capabilities to applications, products and business workflows.", "ai-development.html"]
             ],
             "mvp-development.html": [
-                ["Custom Software Development", "Build business systems, platforms and applications around specific operational requirements.", "custom-software-development.html"],
-                ["SaaS Development", "Move from a SaaS MVP into a fuller subscription product and long-term SaaS roadmap.", "saas-development.html"]
+                ["Custom Software Development", "Build systems and applications around specific operational requirements.", "custom-software-development.html"],
+                ["SaaS Development", "Move from a SaaS MVP into a fuller subscription product and long-term roadmap.", "saas-development.html"],
+                ["AI Development", "Build and validate AI-enabled product features around a defined user problem.", "ai-development.html"]
             ],
             "saas-development.html": [
-                ["MVP Development", "Start a new SaaS concept with a focused MVP designed around validation and early users.", "mvp-development.html"],
-                ["Custom Software Development", "Explore custom business platforms, integrations and purpose-built applications.", "custom-software-development.html"]
+                ["MVP Development", "Start a new SaaS concept with a focused MVP designed around validation.", "mvp-development.html"],
+                ["Custom Software Development", "Explore custom business platforms, integrations and applications.", "custom-software-development.html"],
+                ["AI Development", "Integrate AI agents, intelligent workflows and AI features into digital products.", "ai-development.html"]
+            ],
+            "ai-development.html": [
+                ["Custom Software Development", "Build the wider business platform or application around specific workflows and requirements.", "custom-software-development.html"],
+                ["MVP Development", "Validate an AI product concept with a focused version-one release.", "mvp-development.html"],
+                ["SaaS Development", "Build AI-enabled SaaS products with user accounts, workflows, integrations and subscriptions.", "saas-development.html"]
             ]
         };
 
         const links = relatedMap[currentFile];
+        const relatedSection = document.createElement("section");
+        relatedSection.className = "eg-related-links";
         relatedSection.innerHTML = `
             <div class="container">
                 <div class="eg-section-head">
                     <p class="section-eyebrow">Related Development Services</p>
                     <h2>Choose the development path that fits the product and business objective.</h2>
                 </div>
-                <div class="eg-related-grid">
+                <div class="eg-related-grid eg-related-grid-three">
                     ${links.map(([title, copy, href]) => `
                         <a class="eg-related-card" href="${href}">
                             <h3>${title}</h3>
@@ -409,12 +418,9 @@ if (commercialPages.includes(currentFile)) {
             </div>
         `;
 
-        const faq = main.querySelector('section[id="faq"], .mvp-faq-section, .csd-faq-section, .saas-faq-section');
-        if (faq) {
-            main.insertBefore(relatedSection, faq);
-        } else {
-            main.appendChild(relatedSection);
-        }
+        const faq = main.querySelector('section[id="faq"], .mvp-faq-section, .csd-faq-section, .saas-faq-section, .ai-faq-section');
+        if (faq) main.insertBefore(relatedSection, faq);
+        else main.appendChild(relatedSection);
     }
 }
 
@@ -425,16 +431,11 @@ if (commercialPages.includes(currentFile)) {
 if (currentFile === "portfolio.html") {
     const main = document.querySelector("main");
     const firstSection = main ? main.querySelector("section") : null;
+
     if (firstSection && !document.querySelector(".eg-proof-strip")) {
         const proof = document.createElement("section");
         proof.className = "eg-proof-strip";
-        proof.innerHTML = `
-            <div class="container eg-proof-grid">
-                <div class="eg-proof-item"><strong>30+</strong><span>Software Development Projects</span></div>
-                <div class="eg-proof-item"><strong>50+</strong><span>Marketing Projects</span></div>
-                <div class="eg-proof-item"><strong>2019</strong><span>Established</span></div>
-            </div>
-        `;
+        proof.innerHTML = projectProofMarkup(true);
         insertAfter(firstSection, proof);
     }
 }
@@ -455,8 +456,8 @@ const seoPages = {
         canonical: `${siteUrl}/about.html`, type: "website", robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
     },
     "services.html": {
-        title: "Software, MVP, SaaS, Web, Mobile & AI Services | Eloquent Global",
-        description: "Explore Eloquent Global services including custom software, MVP development, SaaS development, web and mobile applications, AI automation, cloud and digital marketing.",
+        title: "Software, MVP, SaaS & AI Development Services | Eloquent Global",
+        description: "Explore Eloquent Global services including custom software, MVP development, SaaS development, AI development, web and mobile applications, cloud and digital marketing.",
         canonical: `${siteUrl}/services.html`, type: "website", robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
     },
     "custom-software-development.html": {
@@ -474,6 +475,11 @@ const seoPages = {
         description: "SaaS development services for startups and businesses in the USA, UK and Europe, covering product planning, UX/UI, engineering, integrations and post-launch development.",
         canonical: `${siteUrl}/saas-development.html`, type: "website", robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
     },
+    "ai-development.html": {
+        title: "AI Development Company | Eloquent Global",
+        description: "AI development services for businesses and startups in the USA, UK and Europe, including custom AI applications, AI agents and AI-enabled software products.",
+        canonical: `${siteUrl}/ai-development.html`, type: "website", robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+    },
     "portfolio.html": {
         title: "Software & Digital Marketing Portfolio | Eloquent Global",
         description: "Explore selected Eloquent Global work from experience across 30+ software development projects and 50+ marketing projects.",
@@ -486,7 +492,7 @@ const seoPages = {
     },
     "contact.html": {
         title: "Contact Eloquent Global | Software & Digital Services",
-        description: "Contact Eloquent Global to discuss custom software, MVP development, SaaS products, web or mobile products, AI solutions, digital marketing or an international partnership.",
+        description: "Contact Eloquent Global to discuss custom software, MVP development, SaaS products, AI development, web or mobile products, digital marketing or an international partnership.",
         canonical: `${siteUrl}/contact.html`, type: "website", robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
     },
     "requestquote.html": {
@@ -541,8 +547,7 @@ setLink("icon", `${siteUrl}/images/logo/logo.png`);
 setLink("apple-touch-icon", `${siteUrl}/images/logo/logo.png`);
 
 // --------------------------------------------------
-// Structured data: keep legacy pages covered, avoid duplicates on pages
-// that already carry static Organization/Service/Breadcrumb JSON-LD.
+// Structured data for pages without static JSON-LD
 // --------------------------------------------------
 
 const hasStaticJsonLd = Boolean(document.head.querySelector('script[type="application/ld+json"]'));
@@ -600,6 +605,7 @@ if (!hasStaticJsonLd) {
                 ["Custom Software Development", `${siteUrl}/custom-software-development.html`],
                 ["MVP Development for Startups", `${siteUrl}/mvp-development.html`],
                 ["SaaS Development", `${siteUrl}/saas-development.html`],
+                ["AI Development", `${siteUrl}/ai-development.html`],
                 ["Software Engineering", `${siteUrl}/services.html#software-engineering`],
                 ["Web Development", `${siteUrl}/services.html#web-solutions`],
                 ["Mobile Application Development", `${siteUrl}/services.html#mobile-applications`],
