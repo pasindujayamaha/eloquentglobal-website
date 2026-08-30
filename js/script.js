@@ -1,8 +1,5 @@
-const mobileMenuButton =
-    document.querySelector(".mobile-menu-button");
-
-const mainNavigation =
-    document.querySelector(".main-navigation");
+const mobileMenuButton = document.querySelector(".mobile-menu-button");
+const mainNavigation = document.querySelector(".main-navigation");
 
 if (mobileMenuButton && mainNavigation) {
     mobileMenuButton.addEventListener("click", () => {
@@ -10,9 +7,7 @@ if (mobileMenuButton && mainNavigation) {
         mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
     });
 
-    const navigationLinks = mainNavigation.querySelectorAll("a");
-
-    navigationLinks.forEach((link) => {
+    mainNavigation.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", () => {
             mainNavigation.classList.remove("open");
             mobileMenuButton.setAttribute("aria-expanded", "false");
@@ -34,24 +29,15 @@ if (mobileMenuButton && mainNavigation) {
 const allLinks = document.querySelectorAll("a");
 
 allLinks.forEach((link) => {
-    const linkText = link.textContent
-        .trim()
-        .replace(/\s+/g, " ")
-        .toLowerCase();
+    const linkText = link.textContent.trim().replace(/\s+/g, " ").toLowerCase();
 
     if (linkText === "request a quote") {
         link.setAttribute("href", "contact.html");
         link.removeAttribute("download");
     }
 
-    if (
-        linkText === "download profile" ||
-        linkText === "download corporate profile"
-    ) {
-        link.setAttribute(
-            "href",
-            "documents/Eloquent%20Global%20Portfolio.pdf.pdf"
-        );
+    if (linkText === "download profile" || linkText === "download corporate profile") {
+        link.setAttribute("href", "documents/Eloquent%20Global%20Portfolio.pdf.pdf");
         link.setAttribute("download", "Eloquent Global Portfolio.pdf");
     }
 });
@@ -88,32 +74,65 @@ allImages.forEach((image, index) => {
 });
 
 // --------------------------------------------------
-// SEO metadata and structured data
+// Page context
 // --------------------------------------------------
 
 const siteUrl = "https://eloquentglobal.com";
 const defaultSocialImage = `${siteUrl}/images/logo/logo.png`;
 const currentFile = window.location.pathname.split("/").pop() || "index.html";
 
+// --------------------------------------------------
+// MVP service integration on Services page
+// --------------------------------------------------
+
+if (currentFile === "services.html") {
+    const overviewGrid = document.querySelector(".service-overview-grid");
+
+    if (overviewGrid && !overviewGrid.querySelector('a[href="mvp-development.html"]')) {
+        const mvpCard = document.createElement("a");
+        mvpCard.href = "mvp-development.html";
+        mvpCard.className = "overview-card";
+        mvpCard.innerHTML = `
+            <span class="overview-number">07</span>
+            <div class="overview-icon">MVP</div>
+            <h3>MVP Development</h3>
+            <p>Focused startup products built from idea to launch-ready first release.</p>
+            <span class="overview-arrow">→</span>
+        `;
+        overviewGrid.appendChild(mvpCard);
+    }
+}
+
+// --------------------------------------------------
+// SEO metadata and structured data
+// --------------------------------------------------
+
 const seoPages = {
     "index.html": {
-        title: "Software Development & Digital Marketing Company in Sri Lanka | Eloquent Global",
-        description: "Eloquent Global is a Sri Lankan software development and digital marketing company providing custom software, web, mobile, AI, cloud and creative marketing solutions.",
+        title: "Software Development & Digital Marketing Company | Eloquent Global",
+        description: "Eloquent Global provides custom software, web, mobile, AI, cloud and digital marketing solutions for businesses and startups, including clients in the USA, UK and Europe.",
         canonical: `${siteUrl}/`,
         type: "website",
         robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
     },
     "about.html": {
-        title: "About Eloquent Global | Software & Digital Solutions Company Sri Lanka",
-        description: "Learn about Eloquent Global Pvt Ltd, a Sri Lankan software engineering and digital marketing company established in 2019 and operating from Moratuwa.",
+        title: "About Eloquent Global | Software & Digital Solutions Company",
+        description: "Learn about Eloquent Global Pvt Ltd, a Sri Lankan software engineering and digital marketing company established in 2019 and serving international clients through remote delivery.",
         canonical: `${siteUrl}/about.html`,
         type: "website",
         robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
     },
     "services.html": {
-        title: "Software, Web, Mobile, AI & Digital Marketing Services | Eloquent Global",
-        description: "Explore Eloquent Global services including custom software development, web development, mobile apps, AI automation, cloud infrastructure and digital marketing.",
+        title: "Software, MVP, Web, Mobile, AI & Digital Marketing Services | Eloquent Global",
+        description: "Explore Eloquent Global services including custom software, MVP development, web and mobile applications, AI automation, cloud infrastructure and digital marketing.",
         canonical: `${siteUrl}/services.html`,
+        type: "website",
+        robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+    },
+    "mvp-development.html": {
+        title: "MVP Development Services for Startups | Eloquent Global",
+        description: "MVP development services for startups in the USA, UK and Europe. Eloquent Global helps founders plan, design, build, test and launch scalable web, mobile, SaaS and AI MVPs.",
+        canonical: `${siteUrl}/mvp-development.html`,
         type: "website",
         robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
     },
@@ -132,8 +151,8 @@ const seoPages = {
         robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
     },
     "contact.html": {
-        title: "Contact Eloquent Global | Software & Marketing Company Sri Lanka",
-        description: "Contact Eloquent Global in Moratuwa, Sri Lanka to discuss software development, web and mobile projects, AI solutions, digital marketing or business partnerships.",
+        title: "Contact Eloquent Global | Software & Digital Services",
+        description: "Contact Eloquent Global to discuss custom software, MVP development, web or mobile products, AI solutions, digital marketing or an international business partnership.",
         canonical: `${siteUrl}/contact.html`,
         type: "website",
         robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
@@ -148,7 +167,6 @@ const seoPages = {
 };
 
 const seo = seoPages[currentFile] || seoPages["index.html"];
-
 document.title = seo.title;
 
 function setMeta(selector, attribute, value) {
@@ -206,7 +224,7 @@ const organizationSchema = {
     "url": `${siteUrl}/`,
     "logo": `${siteUrl}/images/logo/logo.png`,
     "foundingDate": "2019",
-    "description": "Sri Lankan software engineering and digital marketing company providing software, web, mobile, AI, cloud and creative marketing solutions.",
+    "description": "Software engineering and digital marketing company serving businesses and startups through international remote delivery.",
     "email": "mailto:jayamaha007@gmail.com",
     "telephone": "+94 76 370 1223",
     "address": {
@@ -229,9 +247,7 @@ const webSiteSchema = {
     "@id": `${siteUrl}/#website`,
     "url": `${siteUrl}/`,
     "name": "Eloquent Global",
-    "publisher": {
-        "@id": `${siteUrl}/#organization`
-    }
+    "publisher": {"@id": `${siteUrl}/#organization`}
 };
 
 const pageSchema = {
@@ -241,12 +257,8 @@ const pageSchema = {
     "url": seo.canonical,
     "name": seo.title,
     "description": seo.description,
-    "isPartOf": {
-        "@id": `${siteUrl}/#website`
-    },
-    "about": {
-        "@id": `${siteUrl}/#organization`
-    }
+    "isPartOf": {"@id": `${siteUrl}/#website`},
+    "about": {"@id": `${siteUrl}/#organization`}
 };
 
 const structuredData = [organizationSchema, webSiteSchema, pageSchema];
@@ -257,24 +269,37 @@ if (currentFile === "services.html") {
         "@type": "ItemList",
         "name": "Eloquent Global Services",
         "itemListElement": [
-            "Software Engineering",
-            "Web Development",
-            "Mobile Application Development",
-            "AI and Automation",
-            "Cloud and Infrastructure",
-            "Digital Marketing"
+            ["Software Engineering", `${siteUrl}/services.html#software-engineering`],
+            ["Web Development", `${siteUrl}/services.html#web-solutions`],
+            ["Mobile Application Development", `${siteUrl}/services.html#mobile-applications`],
+            ["AI and Automation", `${siteUrl}/services.html#ai-automation`],
+            ["Cloud and Infrastructure", `${siteUrl}/services.html#cloud-infrastructure`],
+            ["Digital Marketing", `${siteUrl}/services.html#digital-marketing`],
+            ["MVP Development for Startups", `${siteUrl}/mvp-development.html`]
         ].map((service, index) => ({
             "@type": "ListItem",
             "position": index + 1,
             "item": {
                 "@type": "Service",
-                "name": service,
-                "provider": {
-                    "@id": `${siteUrl}/#organization`
-                },
+                "name": service[0],
+                "url": service[1],
+                "provider": {"@id": `${siteUrl}/#organization`},
                 "areaServed": "Worldwide"
             }
         }))
+    });
+}
+
+if (currentFile === "mvp-development.html") {
+    structuredData.push({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": `${siteUrl}/mvp-development.html#service`,
+        "name": "MVP Development Services for Startups",
+        "serviceType": "Minimum Viable Product development",
+        "provider": {"@id": `${siteUrl}/#organization`},
+        "areaServed": ["United States", "United Kingdom", "Europe"],
+        "description": seo.description
     });
 }
 
@@ -282,28 +307,27 @@ if (currentFile !== "index.html" && currentFile !== "requestquote.html") {
     const breadcrumbName = {
         "about.html": "About",
         "services.html": "Services",
+        "mvp-development.html": "MVP Development",
         "portfolio.html": "Our Work",
         "leadership.html": "Team",
         "contact.html": "Contact"
     }[currentFile] || "Page";
 
+    const items = [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": `${siteUrl}/`}
+    ];
+
+    if (currentFile === "mvp-development.html") {
+        items.push({"@type": "ListItem", "position": 2, "name": "Services", "item": `${siteUrl}/services.html`});
+        items.push({"@type": "ListItem", "position": 3, "name": "MVP Development", "item": seo.canonical});
+    } else {
+        items.push({"@type": "ListItem", "position": 2, "name": breadcrumbName, "item": seo.canonical});
+    }
+
     structuredData.push({
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": `${siteUrl}/`
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": breadcrumbName,
-                "item": seo.canonical
-            }
-        ]
+        "itemListElement": items
     });
 }
 
