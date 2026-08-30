@@ -56,3 +56,41 @@ if (mobileMenuButton && mainNavigation) {
     });
 
 }
+
+
+// --------------------------------------------------
+// Global CTA link fixes
+// --------------------------------------------------
+
+const allLinks = document.querySelectorAll("a");
+
+allLinks.forEach((link) => {
+
+    const linkText = link.textContent
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase();
+
+    // Send every Request a Quote button to the Contact page.
+    if (linkText === "request a quote") {
+        link.setAttribute("href", "contact.html");
+        link.removeAttribute("download");
+    }
+
+    // Make profile buttons download the actual company portfolio file.
+    if (
+        linkText === "download profile" ||
+        linkText === "download corporate profile"
+    ) {
+        link.setAttribute(
+            "href",
+            "documents/Eloquent%20Global%20Portfolio.pdf.pdf"
+        );
+
+        link.setAttribute(
+            "download",
+            "Eloquent Global Portfolio.pdf"
+        );
+    }
+
+});
