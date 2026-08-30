@@ -94,3 +94,29 @@ allLinks.forEach((link) => {
     }
 
 });
+
+
+// --------------------------------------------------
+// Image path compatibility fixes
+// --------------------------------------------------
+
+const imagePathFixes = {
+    "images/portfolio/feedback-management.jpg": "images/portfolio/feedback-management.png",
+    "images/portfolio/transiti.jpg": "images/portfolio/transiti.png",
+    "images/portfolio/community-platform.jpg": "images/portfolio/community-platform.png",
+    "images/marketing/digital-marketing.jpg": "images/marketing/digital-marketing.png",
+    "images/marketing/video-production.jpg": "images/marketing/video-production.png",
+    "images/marketing/commercial-photography.jpg": "images/marketing/commercial-photography.png"
+};
+
+const allImages = document.querySelectorAll("img");
+
+allImages.forEach((image) => {
+
+    const currentPath = image.getAttribute("src");
+
+    if (currentPath && imagePathFixes[currentPath]) {
+        image.setAttribute("src", imagePathFixes[currentPath]);
+    }
+
+});
