@@ -1,0 +1,443 @@
+/* ==================================================
+   CUSTOM SOFTWARE DEVELOPMENT PAGE
+================================================== */
+
+.csd-hero {
+    padding: 110px 0 96px;
+    background: linear-gradient(180deg, #f8faf9 0%, #ffffff 100%);
+    border-bottom: 1px solid var(--border);
+}
+
+.csd-hero-grid,
+.csd-two-column,
+.csd-fit-layout,
+.csd-faq-layout,
+.csd-final-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
+    gap: 70px;
+    align-items: center;
+}
+
+.csd-hero-copy h1 {
+    max-width: 850px;
+}
+
+.csd-hero-lead {
+    max-width: 730px;
+    margin-top: 28px;
+    font-size: 1.12rem;
+}
+
+.csd-hero-actions,
+.csd-final-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+}
+
+.csd-trust-row,
+.csd-solution-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 42px;
+}
+
+.csd-trust-row span,
+.csd-solution-tags span {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--dark);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.csd-hero-panel {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.csd-system-card {
+    width: min(100%, 470px);
+    padding: 34px;
+    background: var(--dark);
+    border-radius: 28px;
+    box-shadow: var(--shadow-medium);
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.csd-system-top,
+.csd-system-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.csd-system-top {
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+}
+
+.csd-system-card > strong {
+    display: block;
+    margin: 34px 0 26px;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.05;
+}
+
+.csd-system-steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.csd-system-steps span {
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    font-size: 0.87rem;
+    font-weight: 600;
+}
+
+.csd-system-status {
+    justify-content: flex-start;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.82rem;
+}
+
+.csd-system-status i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #67c56e;
+    box-shadow: 0 0 0 6px rgba(103, 197, 110, 0.12);
+}
+
+.csd-intro-section,
+.csd-capabilities-section,
+.csd-process-section,
+.csd-fit-section,
+.csd-partner-section,
+.csd-solutions-section,
+.csd-related-section,
+.csd-faq-section,
+.csd-final-cta {
+    padding: 100px 0;
+}
+
+.csd-intro-section,
+.csd-fit-section,
+.csd-faq-section {
+    background: var(--white);
+}
+
+.csd-capabilities-section,
+.csd-partner-section,
+.csd-solutions-section,
+.csd-related-section {
+    background: var(--off-white);
+}
+
+.csd-process-section {
+    background: var(--dark);
+}
+
+.csd-two-column,
+.csd-fit-layout,
+.csd-faq-layout {
+    align-items: start;
+}
+
+.csd-copy-block p + p {
+    margin-top: 20px;
+}
+
+.csd-section-heading {
+    max-width: 800px;
+    margin-bottom: 52px;
+}
+
+.csd-section-heading > p:last-child {
+    max-width: 690px;
+    margin-top: 18px;
+}
+
+.csd-section-heading.centered {
+    margin-inline: auto;
+    text-align: center;
+}
+
+.csd-section-heading.centered > p:last-child {
+    margin-inline: auto;
+}
+
+.csd-card-grid,
+.csd-partner-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.csd-card,
+.csd-partner-grid article {
+    min-height: 250px;
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--white);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.csd-card:hover,
+.csd-partner-grid article:hover {
+    transform: translateY(-4px);
+    border-color: #cad7cc;
+    box-shadow: var(--shadow-small);
+}
+
+.csd-card > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 46px;
+    border-radius: 12px;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.csd-card h3,
+.csd-partner-grid h3 {
+    margin-bottom: 12px;
+    font-size: 1.08rem;
+}
+
+.csd-process-section h2,
+.csd-process-section h3 {
+    color: #fff;
+}
+
+.csd-process-section .section-eyebrow {
+    color: #79c77d;
+}
+
+.csd-process-section .csd-section-heading > p:last-child,
+.csd-process-grid p {
+    color: rgba(255, 255, 255, 0.62);
+}
+
+.csd-process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.csd-process-grid article {
+    padding: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.csd-process-grid article > span {
+    display: block;
+    margin-bottom: 44px;
+    color: #79c77d;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+}
+
+.csd-process-grid h3 {
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+}
+
+.csd-fit-list {
+    display: grid;
+    gap: 18px;
+}
+
+.csd-fit-list div {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.csd-fit-list div:first-child {
+    padding-top: 0;
+}
+
+.csd-fit-list strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--heading);
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+}
+
+.csd-partner-grid article {
+    min-height: 205px;
+}
+
+.csd-solution-tags {
+    justify-content: center;
+    margin-top: 0;
+}
+
+.csd-related-section {
+    border-top: 1px solid var(--border);
+}
+
+.csd-related-section .container {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.csd-related-section .csd-section-heading {
+    margin-bottom: 0;
+}
+
+.csd-faq-list {
+    border-top: 1px solid var(--border);
+}
+
+.csd-faq-list details {
+    border-bottom: 1px solid var(--border);
+}
+
+.csd-faq-list summary {
+    position: relative;
+    padding: 24px 42px 24px 0;
+    color: var(--heading);
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+}
+
+.csd-faq-list summary::-webkit-details-marker {
+    display: none;
+}
+
+.csd-faq-list summary::after {
+    content: "+";
+    position: absolute;
+    top: 22px;
+    right: 4px;
+    color: var(--primary);
+    font-size: 1.35rem;
+    font-weight: 500;
+}
+
+.csd-faq-list details[open] summary::after {
+    content: "−";
+}
+
+.csd-faq-list details p {
+    padding: 0 42px 24px 0;
+}
+
+.csd-final-cta {
+    background: #eef6ef;
+    border-top: 1px solid #dce8dd;
+}
+
+.csd-final-layout {
+    grid-template-columns: minmax(0, 1.25fr) auto;
+}
+
+.csd-final-layout h2 {
+    max-width: 760px;
+}
+
+.csd-final-layout p:last-child {
+    max-width: 680px;
+    margin-top: 16px;
+}
+
+@media (max-width: 1000px) {
+    .csd-card-grid,
+    .csd-partner-grid,
+    .csd-process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .csd-hero-grid,
+    .csd-two-column,
+    .csd-fit-layout,
+    .csd-faq-layout,
+    .csd-final-layout {
+        grid-template-columns: 1fr;
+        gap: 42px;
+    }
+
+    .csd-hero-panel {
+        justify-content: flex-start;
+    }
+
+    .csd-related-section .container {
+        align-items: start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 640px) {
+    .csd-hero {
+        padding: 76px 0 72px;
+    }
+
+    .csd-intro-section,
+    .csd-capabilities-section,
+    .csd-process-section,
+    .csd-fit-section,
+    .csd-partner-section,
+    .csd-solutions-section,
+    .csd-related-section,
+    .csd-faq-section,
+    .csd-final-cta {
+        padding: 72px 0;
+    }
+
+    .csd-card-grid,
+    .csd-partner-grid,
+    .csd-process-grid,
+    .csd-system-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .csd-system-card {
+        padding: 24px;
+        border-radius: 20px;
+    }
+
+    .csd-card,
+    .csd-partner-grid article,
+    .csd-process-grid article {
+        min-height: 0;
+    }
+
+    .csd-card > span,
+    .csd-process-grid article > span {
+        margin-bottom: 24px;
+    }
+}
