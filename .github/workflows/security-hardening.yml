@@ -1,0 +1,111 @@
+name: One-time website security hardening
+
+on:
+  push:
+    paths:
+      - '.github/workflows/security-hardening.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  harden:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Harden static HTML and audit repository
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+
+          csp = "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'none'; frame-src 'none'; media-src 'self'; worker-src 'none'; manifest-src 'self'; upgrade-insecure-requests"
+          security_meta = (
+              f'<meta http-equiv="Content-Security-Policy" content="{csp}">'
+              '<meta name="referrer" content="strict-origin-when-cross-origin">'
+          )
+
+          # The quote page is obsolete. Remove its client-side form and redirect safely to Contact.
+          quote = Path('requestquote.html')
+          if quote.exists():
+              quote.write_text('''<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta http-equiv="Content-Security-Policy" content="default-src \'self\'; base-uri \'self\'; object-src \'none\'; script-src \'self\'; style-src \'self\' \'unsafe-inline\' https://fonts.googleapis.com; font-src \'self\' https://fonts.gstatic.com; img-src \'self\' data: https:; connect-src \'none\'; frame-src \'none\'; media-src \'self\'; worker-src \'none\'; manifest-src \'self\'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="robots" content="noindex,follow"><link rel="canonical" href="https://eloquentglobal.com/contact.html"><meta http-equiv="refresh" content="0;url=contact.html"><title>Contact Eloquent Global</title><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css"></head><body><main><section class="home-contact-section"><div class="container"><p class="section-eyebrow">Contact Eloquent Global</p><h1>This page has moved.</h1><p>Please continue to our Contact page.</p><p><a class="button button-primary" href="contact.html">Go to Contact</a></p></div></section></main></body></html>''', encoding='utf-8')
+
+          anchor_pattern = re.compile(r'<a\b([^>]*\btarget=["\']_blank["\'][^>]*)>', re.I)
+          rel_pattern = re.compile(r'\brel=["\']([^"\']*)["\']', re.I)
+
+          def secure_anchor(match):
+              attrs = match.group(1)
+              rel = rel_pattern.search(attrs)
+              if rel:
+                  vals = rel.group(1).split()
+                  for value in ('noopener', 'noreferrer'):
+                      if value not in vals:
+                          vals.append(value)
+                  attrs = rel_pattern.sub('rel="' + ' '.join(vals) + '"', attrs, count=1)
+              else:
+                  attrs += ' rel="noopener noreferrer"'
+              return '<a' + attrs + '>'
+
+          changed = []
+          for path in Path('.').glob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              updated = text
+              if 'http-equiv="Content-Security-Policy"' not in updated:
+                  updated = re.sub(r'<head\b[^>]*>', lambda m: m.group(0) + security_meta, updated, count=1, flags=re.I)
+              if 'name="referrer"' not in updated:
+                  updated = re.sub(r'<head\b[^>]*>', lambda m: m.group(0) + '<meta name="referrer" content="strict-origin-when-cross-origin">', updated, count=1, flags=re.I)
+              updated = anchor_pattern.sub(secure_anchor, updated)
+              if updated != text:
+                  path.write_text(updated, encoding='utf-8')
+                  changed.append(str(path))
+
+          # Audit current deployable text files for relevant static-site risks.
+          problems = []
+          secret_patterns = [
+              re.compile(r'AKIA[0-9A-Z]{16}'),
+              re.compile(r'AIza[0-9A-Za-z_-]{35}'),
+              re.compile(r'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----'),
+              re.compile(r'(?i)(?:api[_-]?key|client[_-]?secret|password|passwd)\s*[:=]\s*["\'][^"\']{8,}["\']'),
+          ]
+
+          for path in [*Path('.').glob('*.html'), *Path('js').glob('*.js'), *Path('css').glob('*.css')]:
+              text = path.read_text(encoding='utf-8', errors='ignore')
+              if 'http://' in text:
+                  problems.append(f'{path}: insecure http:// reference')
+              for pat in secret_patterns:
+                  if pat.search(text):
+                      problems.append(f'{path}: possible secret pattern')
+              if path.suffix == '.html':
+                  for m in re.finditer(r'<script\b([^>]*)>', text, re.I):
+                      attrs = m.group(1)
+                      if 'src=' not in attrs.lower() and 'application/ld+json' not in attrs.lower():
+                          problems.append(f'{path}: inline executable script')
+
+          if problems:
+              print('Security audit failed:')
+              for p in problems:
+                  print(' -', p)
+              sys.exit(1)
+
+          print('Hardened files:')
+          for p in changed:
+              print(' -', p)
+          print('Audit checks passed: no insecure HTTP references, obvious embedded secrets, or inline executable scripts in deployable pages.')
+          PY
+
+      - name: Commit hardening changes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html'
+          if git diff --cached --quiet; then
+            echo "No hardening changes required"
+          else
+            git commit -m "Harden static website security"
+            git push
+          fi
