@@ -1,0 +1,43 @@
+name: Mask visible phone number
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/mask-phone-number.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  mask-phone:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Replace visible phone number with Call Now
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          pattern = re.compile(r'>(\s*)\+94 76 370 1223(\s*)<')
+          changed = []
+          for path in Path('.').glob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              new = pattern.sub(r'>\1Call Now\2<', text)
+              if new != text:
+                  path.write_text(new, encoding='utf-8')
+                  changed.append(str(path))
+          print('Changed:', ', '.join(changed) if changed else 'none')
+          PY
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html'
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Mask visible phone number with Call Now"
+            git push
+          fi
