@@ -1,0 +1,45 @@
+name: Fix WhatsApp labels
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-whatsapp-label.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-whatsapp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set WhatsApp visible labels
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          anchor = re.compile(r'(<a\b[^>]*href=["\']https://wa\.me/[^"\']+["\'][^>]*>)(.*?)(</a>)', re.I|re.S)
+          changed=[]
+          for path in Path('.').glob('*.html'):
+              text=path.read_text(encoding='utf-8')
+              def repl(m):
+                  body=m.group(2).replace('Call Now','Open WhatsApp')
+                  return m.group(1)+body+m.group(3)
+              new=anchor.sub(repl,text)
+              if new!=text:
+                  path.write_text(new,encoding='utf-8')
+                  changed.append(str(path))
+          print('Changed:', ', '.join(changed) if changed else 'none')
+          PY
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html'
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Use Open WhatsApp for WhatsApp links"
+            git push
+          fi
