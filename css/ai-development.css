@@ -1,0 +1,442 @@
+/* ==================================================
+   AI DEVELOPMENT PAGE
+================================================== */
+
+.ai-hero {
+    padding: 110px 0 96px;
+    background: linear-gradient(180deg, #f8faf9 0%, #ffffff 100%);
+    border-bottom: 1px solid var(--border);
+}
+
+.ai-hero-grid,
+.ai-two-column,
+.ai-usecases-layout,
+.ai-faq-layout,
+.ai-related-layout,
+.ai-final-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
+    gap: 70px;
+    align-items: center;
+}
+
+.ai-hero-copy h1 {
+    max-width: 850px;
+}
+
+.ai-hero-lead {
+    max-width: 760px;
+    margin-top: 28px;
+    font-size: 1.12rem;
+}
+
+.ai-hero-actions,
+.ai-related-actions,
+.ai-final-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+}
+
+.ai-trust-row,
+.ai-tag-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 42px;
+}
+
+.ai-trust-row span,
+.ai-tag-grid span {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--dark);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.ai-hero-panel {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ai-system-card {
+    width: min(100%, 470px);
+    padding: 34px;
+    background: var(--dark);
+    border-radius: 28px;
+    box-shadow: var(--shadow-medium);
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.ai-system-top,
+.ai-system-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.ai-system-top {
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+}
+
+.ai-system-card > strong {
+    display: block;
+    margin: 34px 0 26px;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    line-height: 1.08;
+}
+
+.ai-system-steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.ai-system-steps span {
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    font-size: 0.87rem;
+    font-weight: 600;
+}
+
+.ai-system-status {
+    justify-content: flex-start;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.82rem;
+}
+
+.ai-system-status i {
+    flex: 0 0 auto;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #67c56e;
+    box-shadow: 0 0 0 6px rgba(103, 197, 110, 0.12);
+}
+
+.ai-intro-section,
+.ai-capabilities-section,
+.ai-usecases-section,
+.ai-process-section,
+.ai-products-section,
+.ai-responsible-section,
+.ai-partner-section,
+.ai-related-section,
+.ai-faq-section,
+.ai-final-cta {
+    padding: 100px 0;
+}
+
+.ai-intro-section,
+.ai-usecases-section,
+.ai-responsible-section,
+.ai-faq-section {
+    background: var(--white);
+}
+
+.ai-capabilities-section,
+.ai-products-section,
+.ai-partner-section {
+    background: var(--off-white);
+}
+
+.ai-process-section {
+    background: var(--dark);
+}
+
+.ai-two-column,
+.ai-usecases-layout,
+.ai-faq-layout {
+    align-items: start;
+}
+
+.ai-copy-block p + p {
+    margin-top: 20px;
+}
+
+.ai-section-heading {
+    max-width: 820px;
+    margin-bottom: 52px;
+}
+
+.ai-section-heading > p:last-child {
+    max-width: 700px;
+    margin-top: 18px;
+}
+
+.ai-section-heading.centered {
+    margin-inline: auto;
+    text-align: center;
+}
+
+.ai-section-heading.centered > p:last-child {
+    margin-inline: auto;
+}
+
+.ai-card-grid,
+.ai-partner-grid,
+.ai-process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.ai-card,
+.ai-partner-grid article {
+    min-height: 240px;
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--white);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.ai-card:hover,
+.ai-partner-grid article:hover {
+    transform: translateY(-4px);
+    border-color: #cad7cc;
+    box-shadow: var(--shadow-small);
+}
+
+.ai-card > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 46px;
+    border-radius: 12px;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.ai-card h3,
+.ai-partner-grid h3 {
+    margin-bottom: 12px;
+    font-size: 1.08rem;
+}
+
+.ai-usecases-list {
+    display: grid;
+    gap: 18px;
+}
+
+.ai-usecases-list div {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.ai-usecases-list div:first-child {
+    padding-top: 0;
+}
+
+.ai-usecases-list strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--heading);
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+}
+
+.ai-process-section h2,
+.ai-process-section h3 {
+    color: #fff;
+}
+
+.ai-process-section .section-eyebrow {
+    color: #79c77d;
+}
+
+.ai-process-section .ai-section-heading > p:last-child,
+.ai-process-grid p {
+    color: rgba(255, 255, 255, 0.62);
+}
+
+.ai-process-grid article {
+    padding: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.ai-process-grid article > span {
+    display: block;
+    margin-bottom: 44px;
+    color: #79c77d;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+}
+
+.ai-process-grid h3 {
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+}
+
+.ai-tag-grid {
+    justify-content: center;
+    margin-top: 0;
+}
+
+.ai-related-section {
+    background: #f6f9f7;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.ai-related-layout {
+    grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+}
+
+.ai-related-actions {
+    justify-content: flex-end;
+    margin-top: 0;
+}
+
+.ai-faq-list {
+    border-top: 1px solid var(--border);
+}
+
+.ai-faq-list details {
+    border-bottom: 1px solid var(--border);
+}
+
+.ai-faq-list summary {
+    position: relative;
+    padding: 24px 42px 24px 0;
+    color: var(--heading);
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+}
+
+.ai-faq-list summary::-webkit-details-marker {
+    display: none;
+}
+
+.ai-faq-list summary::after {
+    content: "+";
+    position: absolute;
+    top: 22px;
+    right: 4px;
+    color: var(--primary);
+    font-size: 1.35rem;
+}
+
+.ai-faq-list details[open] summary::after {
+    content: "−";
+}
+
+.ai-faq-list details p {
+    padding: 0 42px 24px 0;
+}
+
+.ai-final-cta {
+    background: #eef6ef;
+    border-top: 1px solid #dce8dd;
+}
+
+.ai-final-layout {
+    grid-template-columns: minmax(0, 1.25fr) auto;
+}
+
+.ai-final-layout h2 {
+    max-width: 760px;
+}
+
+.ai-final-layout p:last-child {
+    max-width: 690px;
+    margin-top: 16px;
+}
+
+.ai-final-actions {
+    margin-top: 0;
+}
+
+@media (max-width: 1000px) {
+    .ai-card-grid,
+    .ai-partner-grid,
+    .ai-process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ai-hero-grid,
+    .ai-two-column,
+    .ai-usecases-layout,
+    .ai-faq-layout,
+    .ai-related-layout,
+    .ai-final-layout {
+        grid-template-columns: 1fr;
+        gap: 42px;
+    }
+
+    .ai-hero-panel {
+        justify-content: flex-start;
+    }
+
+    .ai-related-actions {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 640px) {
+    .ai-hero {
+        padding: 76px 0 72px;
+    }
+
+    .ai-intro-section,
+    .ai-capabilities-section,
+    .ai-usecases-section,
+    .ai-process-section,
+    .ai-products-section,
+    .ai-responsible-section,
+    .ai-partner-section,
+    .ai-related-section,
+    .ai-faq-section,
+    .ai-final-cta {
+        padding: 72px 0;
+    }
+
+    .ai-card-grid,
+    .ai-partner-grid,
+    .ai-process-grid,
+    .ai-system-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-system-card {
+        padding: 24px;
+        border-radius: 20px;
+    }
+
+    .ai-card,
+    .ai-partner-grid article,
+    .ai-process-grid article {
+        min-height: 0;
+    }
+
+    .ai-card > span,
+    .ai-process-grid article > span {
+        margin-bottom: 24px;
+    }
+}
