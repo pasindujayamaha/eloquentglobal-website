@@ -82,10 +82,24 @@ const defaultSocialImage = `${siteUrl}/images/logo/logo.png`;
 const currentFile = window.location.pathname.split("/").pop() || "index.html";
 
 // --------------------------------------------------
-// MVP service integration on Services page
+// Service integration on Services page
 // --------------------------------------------------
 
 if (currentFile === "services.html") {
+    const softwareHeading = [...document.querySelectorAll(".service-capability h3")]
+        .find((heading) => heading.textContent.trim() === "Custom Software Development");
+
+    if (softwareHeading) {
+        const capability = softwareHeading.closest(".service-capability");
+        if (capability && !capability.querySelector(".text-link")) {
+            const link = document.createElement("a");
+            link.href = "custom-software-development.html";
+            link.className = "text-link";
+            link.innerHTML = "Explore custom software development <span>→</span>";
+            capability.appendChild(link);
+        }
+    }
+
     const overviewGrid = document.querySelector(".service-overview-grid");
 
     if (overviewGrid && !overviewGrid.querySelector('a[href="mvp-development.html"]')) {
@@ -126,6 +140,13 @@ const seoPages = {
         title: "Software, MVP, Web, Mobile, AI & Digital Marketing Services | Eloquent Global",
         description: "Explore Eloquent Global services including custom software, MVP development, web and mobile applications, AI automation, cloud infrastructure and digital marketing.",
         canonical: `${siteUrl}/services.html`,
+        type: "website",
+        robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+    },
+    "custom-software-development.html": {
+        title: "Custom Software Development Company | Eloquent Global",
+        description: "Custom software development services for businesses in the USA, UK and Europe. Eloquent Global designs and builds scalable web platforms, internal systems, integrations and business applications.",
+        canonical: `${siteUrl}/custom-software-development.html`,
         type: "website",
         robots: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
     },
@@ -269,6 +290,7 @@ if (currentFile === "services.html") {
         "@type": "ItemList",
         "name": "Eloquent Global Services",
         "itemListElement": [
+            ["Custom Software Development", `${siteUrl}/custom-software-development.html`],
             ["Software Engineering", `${siteUrl}/services.html#software-engineering`],
             ["Web Development", `${siteUrl}/services.html#web-solutions`],
             ["Mobile Application Development", `${siteUrl}/services.html#mobile-applications`],
@@ -290,13 +312,21 @@ if (currentFile === "services.html") {
     });
 }
 
-if (currentFile === "mvp-development.html") {
+if (currentFile === "mvp-development.html" || currentFile === "custom-software-development.html") {
+    const serviceName = currentFile === "mvp-development.html"
+        ? "MVP Development Services for Startups"
+        : "Custom Software Development Services";
+
+    const serviceType = currentFile === "mvp-development.html"
+        ? "Minimum Viable Product development"
+        : "Custom software development";
+
     structuredData.push({
         "@context": "https://schema.org",
         "@type": "Service",
-        "@id": `${siteUrl}/mvp-development.html#service`,
-        "name": "MVP Development Services for Startups",
-        "serviceType": "Minimum Viable Product development",
+        "@id": `${seo.canonical}#service`,
+        "name": serviceName,
+        "serviceType": serviceType,
         "provider": {"@id": `${siteUrl}/#organization`},
         "areaServed": ["United States", "United Kingdom", "Europe"],
         "description": seo.description
@@ -307,6 +337,7 @@ if (currentFile !== "index.html" && currentFile !== "requestquote.html") {
     const breadcrumbName = {
         "about.html": "About",
         "services.html": "Services",
+        "custom-software-development.html": "Custom Software Development",
         "mvp-development.html": "MVP Development",
         "portfolio.html": "Our Work",
         "leadership.html": "Team",
@@ -317,9 +348,9 @@ if (currentFile !== "index.html" && currentFile !== "requestquote.html") {
         {"@type": "ListItem", "position": 1, "name": "Home", "item": `${siteUrl}/`}
     ];
 
-    if (currentFile === "mvp-development.html") {
+    if (currentFile === "mvp-development.html" || currentFile === "custom-software-development.html") {
         items.push({"@type": "ListItem", "position": 2, "name": "Services", "item": `${siteUrl}/services.html`});
-        items.push({"@type": "ListItem", "position": 3, "name": "MVP Development", "item": seo.canonical});
+        items.push({"@type": "ListItem", "position": 3, "name": breadcrumbName, "item": seo.canonical});
     } else {
         items.push({"@type": "ListItem", "position": 2, "name": breadcrumbName, "item": seo.canonical});
     }
